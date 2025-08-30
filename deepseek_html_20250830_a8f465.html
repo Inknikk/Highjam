@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HighJam | Premium Beats & Music Production</title>
+    <meta name="description" content="Get the hottest beats in the industry. Premium quality beats crafted for professional artists.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-purple: #8a2be2;
+            --primary-magenta: #ff00cc;
+            --dark-bg: #0f001f;
+            --text-light: #ffffff;
+            --text-muted: #d9b3ff;
+            --card-bg: rgba(20, 0, 40, 0.6);
+            --nav-bg: rgba(0, 0, 0, 0.9);
+            --success: #28ca42;
+            --warning: #ffbd2e;
+            --error: #ff5f57;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary-purple), var(--primary-magenta));
+            --gradient-dark: linear-gradient(to top, #7d002a, #340048);
+            --gradient-card: linear-gradient(to bottom, #48004d, #64005f);
+            
+            /* Shadows */
+            --shadow-lg: 0 10px 25px rgba(138, 43, 226, 0.4);
+            --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.2);
+            
+            /* Transitions */
+            --transition-normal: all 0.3s ease;
+            --transition-slow: all 0.5s ease;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            font-size: 100%;
+        }
+
+        body {
+            width: 100%;
+            background: var(--dark-bg);
+            font-family: "Poppins", sans-serif;
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-light);
+        }
+
+        li {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        .navbar {
+            width: 100%;
+            background: var(--nav-bg);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            border-radius: 12px;
+            width: 120px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-muted);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            background: var(--gradient-primary);
+            transition: var(--transition-normal);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .toggle-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: fixed;
+            top: 70px;
+            right: -100%;
+            width: 280px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            height: calc(100vh - 70px);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: right 0.3s ease;
+            z-index: 999;
+        }
+
+        .dropdown-menu.open {
+            right: 0;
+        }
+
+        .dropdown-link {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .dropdown-link:hover {
+            color: var(--primary-purple);
+        }
+
+        /* Hero Section */
+        #hero-section {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(29, 0, 72, 0.7) 0%, rgba(52, 0, 72, 0.8) 100%), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80') no-repeat center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-text-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .ag-words {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .hero-text-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+        }
+
+        .feature-card .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            width: 65%;
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            animation: progressPulse 2s ease-in-out infinite;
+        }
+
+        .progress-indicator span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Beats Section */
+        .beats-section {
+            background: var(--gradient-dark);
+            padding: 100px 0;
+        }
+
+        .music-player-container {
+            background: rgba(10, 5, 20, 0.7);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .player-header {
+            background: linear-gradient(90deg, #4a004a, #2d0042);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .player-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .player-controls .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff5f57;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .player-controls .control:nth-child(2) {
+            background: #ffbd2e;
+        }
+
+        .player-controls .control:nth-child(3) {
+            background: #28ca42;
+        }
+
+        .player-title {
+            margin-left: 15px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .music-box {
+            width: 100%;
+            height: 600px;
+            border-radius: 0 0 15px 15px;
+            overflow: hidden;
+        }
+
+        .music-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Licenses Section */
+        .licenses-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80') fixed center;
+            background-size: cover;
+            padding: 100px 0;
+        }
+
+        .licenses-container {
+            text-align: center;
+        }
+
+        .licenses-container h3 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .license {
+            width: 250px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 25px 20px;
+            text-align: center;
+            color: var(--text-light);
+            transition: var(--transition-normal);
+            backdrop-filter: blur(5px);
+        }
+
+        .license:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-magenta);
+            box-shadow: 0 10px 20px rgba(157, 0, 255, 0.3);
+        }
+
+        .leasebox h4 {
+            color: #b22dff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .instant-delivery {
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .formats {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .ff, .fo {
+            font-size: 0.7rem;
+            border-radius: 12px;
+            padding: 3px 10px;
+        }
+
+        .ff {
+            background: #9700ef;
+        }
+
+        .fo {
+            background: #ef0093;
+        }
+
+        .lease_features {
+            margin: 15px auto;
+            text-align: left;
+        }
+
+        .lease_features p {
+            font-size: 0.7rem;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .price_value {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ef0093;
+            text-shadow: 2px 1px 3px rgb(0, 0, 0);
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* Services Section */
+        .service-section {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), #000000), url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80') fixed center;
+            background-size: cover;
+            padding: 100px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--gradient-card);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 25px;
+            box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.75);
+            border-radius: 10px;
+            transition: var(--transition-slow);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+            transition: var(--transition-slow);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.7;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary-magenta);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .service-card ul {
+            text-align: left;
+        }
+
+        .service-card li {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .service-card li::before {
+            content: "❣";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Testimonials Section */
+        .testimonial-section {
+            background: linear-gradient(rgba(17, 16, 16, 0.681), rgba(0, 0, 0, 0.755)), url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80') fixed center;
+            background-size: cover;
+            padding: 100px 0;
+        }
+
+        .testimonial-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .testimonial {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .testimonial-text {
+            border-radius: 20px;
+            color: var(--text-light);
+            background: linear-gradient(to top, #af003a, purple);
+            width: 100%;
+            min-height: 300px;
+            position: relative;
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .user-text {
+            width: 100%;
+            text-align: center;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .user-text.active-text {
+            display: block;
+        }
+
+        .user-text .fa-solid {
+            font-size: 30px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .user-text span {
+            display: block;
+            font-size: 13px;
+            margin-top: 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .testimonial-pic {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .user-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            border: 2px solid transparent;
+        }
+
+        .user-pic.active-pic {
+            border-color: var(--primary-magenta);
+            transform: scale(1.1);
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(to bottom, #920031, #340048);
+            padding: 100px 0;
+        }
+
+        .about-container {
+            background-color: #000;
+            border: 2px solid rgba(31, 7, 7, 0.273);
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .about-image {
+            background: url('https://images.unsplash.com/photo-1511735111819-9a3f7709049c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1676&q=80') no-repeat center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .inner-container {
+            background: linear-gradient(135deg, #920031 0%, #83002c 50%, #830025 80%);
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .inner-container h4 {
+            margin-bottom: 25px;
+            font-size: 2rem;
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+        }
+
+        .inner-container h4::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        .text {
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skills span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: var(--transition-normal);
+        }
+
+        .skills span:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80') fixed center;
+            background-size: cover;
+            padding: 100px 0;
+        }
+
+        .faq-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .question button {
+            position: relative;
+            width: 100%;
+            background-color: #000000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            color: var(--text-light);
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .question button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            border-radius: 6px 0 0 6px;
+            height: 100%;
+            background-color: #520072;
+            transition: var(--transition-normal);
+        }
+
+        .question button:hover::before {
+            background-color: #dd0042;
+        }
+
+        .question button i {
+            color: #6e009a;
+            background: #100d0fa9;
+            border-radius: 50%;
+            padding: 6px;
+            transition: var(--transition-normal);
+        }
+
+        .question button:hover i {
+            color: #dd0042;
+        }
+
+        .question p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            max-height: 0;
+            border-radius: 10px;
+            opacity: 0;
+            line-height: 1.5;
+            text-align: justify;
+            padding: 0 25px;
+            transition: all 0.5s ease;
+            background: rgba(14, 11, 14, 0.932);
+            overflow: hidden;
+        }
+
+        .question p.show {
+            max-height: 400px;
+            opacity: 1;
+            padding: 20px 25px;
+            margin-top: 10px;
+        }
+
+        .d-arrow.rotate {
+            transform: rotate(180deg);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1a0030 0%, #2c0044 100%);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: rgba(20, 0, 40, 0.6);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form {
+            padding: 40px;
+            background: #0a0015bc;
+        }
+
+        .form-head {
+            margin-bottom: 30px;
+        }
+
+        .form-head h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #b300ff, #6600cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .form-head p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: var(--transition-normal);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #9900ff;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(153, 0, 255, 0.3);
+        }
+
+        textarea.input-field {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-info {
+            padding: 40px;
+            background: linear-gradient(180deg, #25004d 0%, #1a0033 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .social-heading {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            color: #cc99ff;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            width: 100%;
+            text-align: left;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .social-text {
+            flex: 1;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #000;
+            padding: 70px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h4::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #E91E63;
+            width: 50px;
+            height: 2px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #b3b3b3;
+            font-size: 0.9rem;
+            font-weight: 300;
+            transition: var(--transition-normal);
+            display: block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--text-light);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: var(--transition-normal);
+        }
+
+        .social-links a:hover {
+            background: var(--text-light);
+            color: #000;
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes progressPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes floatElement {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.7;
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+                opacity: 0.5;
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+                opacity: 0.6;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-text-content p {
+                margin: 0 auto 30px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                min-height: 300px;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .navlinks, .nav-btn {
+                display: none;
+            }
+            
+            .toggle-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 80px 0;
+            }
+            
+            .hero-text-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .faq-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-col h4::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .inner-container {
+                padding: 30px;
+            }
+            
+            .inner-container h4 {
+                font-size: 1.5rem;
+            }
+            
+            .skills {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="#hero-section">
+                    <img src="https://via.placeholder.com/120x50/8a2be2/ffffff?text=HIGHJAM" alt="highjam logo">
+                </a>
+            </div>
+
+            <ul class="navlinks">
+                <li><a href="#hero-section" class="nav-link">HOME</a></li>
+                <li><a href="#beats" class="nav-link">BEATS</a></li>
+                <li><a href="#licenses" class="nav-link">LICENSE</a></li>
+                <li><a href="#services" class="nav-link">SERVICES</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
+            </ul>
+
+            <a href="#beats" class="btn btn-primary nav-btn">Get Started</a>
+
+            <div class="toggle-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown-menu">
+        <li><a href="#hero-section" class="dropdown-link">HOME</a></li>
+        <li><a href="#beats" class="dropdown-link">BEATS</a></li>
+        <li><a href="#licenses" class="dropdown-link">LICENSE</a></li>
+        <li><a href="#services" class="dropdown-link">SERVICES</a></li>
+        <li><a href="#contact" class="dropdown-link">CONTACT</a></li>
+        <a href="#beats" class="btn btn-primary dropdown-btn">Get Started</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero-section" class="section">
+        <div class="container hero-content">
+            <div class="hero-text-content">
+                <h1>Get the <span class="ag-words">Hottest Beats</span><br>in The Industry</h1>
+                <p>You're one click away from your next hit! Premium quality beats crafted for professional artists.</p>
+                <a href="#beats" class="btn btn-primary">Explore Beats</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-content">
+                    <div class="card-icon">🎵</div>
+                    <h3>Beat Packs</h3>
+                    <p>Curated collections coming soon...</p>
+                    <div class="progress-indicator">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span>In development</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beats Section -->
+    <section id="beats" class="section beats-section">
+        <div class="container">
+            <h2 class="section-title">Explore Our Beats</h2>
+            <p class="section-subtitle">Browse our collection of premium beats and find the perfect sound for your next project</p>
+            
+            <div class="music-player-container">
+                <div class="player-header">
+                    <div class="player-controls">
+                        <span class="control active"></span>
+                        <span class="control"></span>
+                        <span class="control"></span>
+                    </div>
+                    <div class="player-title">Beatstars Player</div>
+                </div>
+                <div class="music-box">
+                    <iframe src="https://player.beatstars.com/?storeId=142888" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Licenses Section -->
+    <section id="licenses" class="section licenses-section">
+        <div class="container licenses-container">
+            <h3 class="section-title">Licensing Options</h3>
+            
+            <div class="wrapper">
+                <div class="license">
+                    <div class="leasebox">
+                        <h4 class="lease">FREE</h4>
+                        <p class="instant-delivery">Instant Delivery</p>
+                    </div>
+
+                    <div class="formats">
+                        <p class="ff">MP3</p>
+                    </div>
+
+                    <div class="lease_features">
+                        <p>❗ Tagged</p>
+                        <p>❗ No distribution rights</p>
+                        <p>❗ No streaming rights</p>
+                        <p>❗ No monetization rights</p>
+                        <p>❗ Must credit producer</p>
+                    </div>
+
+                    <span class="price_value">$0.00</span>
+                </div>
+                
+                <div class="license">
+                    <div class="leasebox">
+                        <h4 class="lease">BASIC</h4>
+                        <p class="instant-delivery">Instant Delivery</p>
+                    </div>
+
+                    <div class="formats">
+                        <p class="ff">MP3</p>
+                        <p class="ff">WAV</p>
+                    </div>
+
+                    <div class="lease_features">
+                        <p>❗ Tagged</p>
+                        <p>✔ Distribute to all stores</p>
+                        <p>❗ Max 250,000 monetized streams</p>
+                        <p>❗ Distribute/sell 5,000 units</p>
+                        <p>❗ Must credit producer</p>
+                    </div>
+
+                    <span class="price_value">$29.99</span>
+                </div>
+                
+                <div class="license">
+                    <div class="leasebox">
+                        <h4 class="lease">STANDARD</h4>
+                        <p class="instant-delivery">Instant Delivery</p>
+                    </div>
+
+                    <div class="formats">
+                        <p class="ff">MP3</p>
+                        <p class="ff">WAV</p>
+                        <p class="fo">STEMS</p>
+                    </div>
+
+                    <div class="lease_features">
+                        <p>✔ Untagged</p>
+                        <p>✔ Distribute to all stores</p>
+                        <p>❗ Max 500,000 monetized streams</p>
+                        <p>❗ Distribute/sell 10,000 units</p>
+                        <p>❗ Must credit producer</p>
+                    </div>
+
+                    <span class="price_value">$99.99</span>
+                </div>
+                
+                <div class="license">
+                    <div class="leasebox">
+                        <h4 class="lease">
+                            <i class="fa-solid fa-crown fa-xs" style="color: #ffd900ef; margin-right: 5px;"></i>
+                            PREMIUM
+                            <i class="fa-solid fa-crown fa-xs" style="color: #ffd900ef; margin-left: 5px;"></i>
+                        </h4>
+                        <p class="instant-delivery">Instant Delivery</p>
+                    </div>
+
+                    <div class="formats">
+                        <p class="ff">MP3</p>
+                        <p class="ff">WAV</p>
+                        <p class="fo">STEMS</p>
+                    </div>
+
+                    <div class="lease_features">
+                        <p>✔ Untagged</p>
+                        <p>✔ Distribute to all stores</p>
+                        <p>✔ Unlimited streaming</p>
+                        <p>✔ Unlimited distribution copies</p>
+                        <p>✔ Keep 100% royalties</p>
+                        <p>❗ Must credit producer</p>
+                    </div>
+
+                    <span class="price_value">$199.99</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section service-section">
+        <div class="container">
+            <div class="services-head">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">I work with small to mid-sized businesses in need of online services and support. See the list of services below to get an idea of what you can expect.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">
+                        <i class="fa-solid fa-record-vinyl"></i>
+                    </span>
+                    <h3>Music Production</h3>
+                    <ul>
+                        <li>Composing & Arrangement of music/beats</li>
+                        <li>Creating backing tracks or instrumentals</li>
+                        <li>Overseeing the entire music production process.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">
+                        <i class="fas fa-microphone-lines"></i>
+                    </span>
+                    <h3>Recording Sessions</h3>
+                    <ul>
+                        <li>Recording sessions for vocals & instrumentals</li>
+                        <li>Overdubbing & layering of tracks.</li>
+                        <li>Professional studio environment</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">
+                        <i class="fa-solid fa-sliders"></i>
+                    </span>
+                    <h3>Mixing</h3>
+                    <ul>
+                        <li>Balancing & blending individual tracks.</li>
+                        <li>Applying effects & processing to enhance the sound.</li>
+                        <li>Creating a stereo mix from individual elements.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </span>
+                    <h3>Editing</h3>
+                    <ul>
+                        <li>Cleaning up recordings by removing unwanted noise</li>
+                        <li>Aligning & quantizing performances for tight timing.</li>
+                        <li>Editing & arranging sections of a song.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">
+                        <i class="fa-solid fa-headphones-simple"></i>
+                    </span>
+                    <h3>Mastering</h3>
+                    <ul>
+                        <li>Preparing the final mix for distribution.</li>
+                        <li>Balancing overall tonal & dynamic aspects.</li>
+                        <li>Adding final touches to achieve a polished sound.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">
+                        <i class="fa-solid fa-ear-listen"></i>
+                    </span>
+                    <h3>Sound Design</h3>
+                    <ul>
+                        <li>Crafting captivating & immersive soundscapes</li>
+                        <li>Tweak spatial audio to amplify engagement</li>
+                        <li>Elevate every experience with precision</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonial-section">
+        <div class="container testimonial-container">
+            <h3 class="section-title">What Our Clients Say</h3>
+
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    <div class="user-text">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <p>HighJam's beats took my music to the next level. The quality is exceptional and the production value is unmatched in the industry.</p>
+                        <span>John McCarthy, Artist</span>
+                    </div>
+                    <div class="user-text active-text">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <p>I've been using HighJam's services for years. The attention to detail and creative input has been invaluable to my career.</p>
+                        <span>Sarah Johnson, Recording Artist</span>
+                    </div>
+                    <div class="user-text">
+                        <i class="fa-solid fa-quote-left"></i>
+                        <p>The mixing and mastering services are top-notch. My tracks have never sounded better since working with HighJam.</p>
+                        <span>Mike Williams, Producer</span>
+                    </div>
+                </div>
+
+                <div class="testimonial-pic">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="user-pic" onclick="showReview()">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="user-pic active-pic" onclick="showReview()">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" class="user-pic" onclick="showReview()">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-image"></div>
+                <div class="inner-container">
+                    <h4>About the Producer</h4>
+                    <p class="text">HighJam is an innovative music producer specializing in creating unique beats that blend multiple genres. With over 10 years of experience in the music industry, HighJam has worked with numerous artists to help bring their musical visions to life. Our passion is crafting sounds that resonate with listeners and inspire creativity.</p>
+                    <div class="skills">
+                        <span>Music Production</span>
+                        <span>Sound Design</span>
+                        <span>Audio Mixing</span>
+                        <span>Beat Making</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq-container">
+                <div class="question">
+                    <button>
+                        <span>How can I purchase a beat?</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                    <p>Simply select the beat you like from the beats player and add it to your cart. Select a license from the options and proceed to checkout. Make the payment, and download it instantly.</p>
+                </div>
+
+                <div class="question">
+                    <button>
+                        <span>What's the difference between MP3 and WAV?</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                    <p>MP3 is a compressed format suitable for listening, while WAV is a high-quality, uncompressed format ideal for professional recording and mastering.</p>
+                </div>
+
+                <div class="question">
+                    <button>
+                        <span>Can I get a custom beat made?</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                    <p>Yes, we offer custom beat production services. Contact us with your requirements, and we'll create a unique beat tailored to your needs.</p>
+                </div>
+
+                <div class="question">
+                    <button>
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                    <p>We accept all major credit cards, PayPal, and cryptocurrency for beat purchases and services.</p>
+                </div>
+
+                <div class="question">
+                    <button>
+                        <span>Do you offer refunds?</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                    <p>Due to the digital nature of our products, we generally don't offer refunds. However, if there's an issue with your purchase, please contact us.</p>
+                </div>
+
+                <div class="question">
+                    <button>
+                        <span>How do I contact you for collaborations?</span>
+                        <i class="fas fa-chevron-down d-arrow"></i>
+                    </button>
+                    <p>Use the contact form below or reach out to us on social media. We're always open to discussing collaboration opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-form">
+                    <div class="form-head">
+                        <h2>Get In Touch</h2>
+                        <p>Have questions or want to work together? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                    </div>
+
+                    <form class="contact" action="">
+                        <div class="input-group">
+                            <input type="text" class="input-field" placeholder="Your Name" required>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="email" class="input-field" placeholder="Your Email" required>
+                        </div>
+
+                        <div class="input-group">
+                            <textarea class="input-field" placeholder="Your Message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary contact-form-btn">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <h3 class="social-heading">Follow Us</h3>
+
+                    <button class="social-btn">
+                        <a href="https://www.instagram.com/_highjam/" target="_blank">
+                            <i class="fab fa-instagram social-icon"></i>
+                            <span class="social-text">@_highjam</span>
+                            <i class="fas fa-arrow-right social-arrow"></i>
+                        </a>
+                    </button>
+
+                    <button class="social-btn">
+                        <a href="https://web.facebook.com/henry.howard.9678067" target="_blank">
+                            <i class="fab fa-facebook social-icon"></i>
+                            <span class="social-text">highjam prod</span>
+                            <i class="fas fa-arrow-right social-arrow"></i>
+                        </a>
+                    </button>
+
+                    <button class="social-btn">
+                        <a href="https://twitter.com/_highjam" target="_blank">
+                            <i class="fab fa-twitter social-icon"></i>
+                            <span class="social-text">highjam music</span>
+                            <i class="fas fa-arrow-right social-arrow"></i>
+                        </a>
+                    </button>
+
+                    <button class="social-btn">
+                        <a href="#https://www.youtube.com/@highjamrecords7776/featured" target="_blank">
+                            <i class="fab fa-youtube social-icon"></i>
+                            <span class="social-text">highjam</span>
+                            <i class="fas fa-arrow-right social-arrow"></i>
+                        </a>
+                    </button>
+
+                    <button class="social-btn">
+                        <a href="mailto:howardhenry853@gmail.com" target="_blank">
+                            <i class="fas fa-envelope social-icon"></i>
+                            <span class="social-text">@highjam.com</span>
+                            <i class="fas fa-arrow-right social-arrow"></i>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h4>company</h4>
+                <ul>
+                    <li><a href="#">about us</a></li>
+                    <li><a href="#services">our services</a></li>
+                    <li><a href="#">privacy policy</a></li>
+                    <li><a href="#">visit website</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>get help</h4>
+                <ul>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#">shipping</a></li>
+                    <li><a href="#">returns</a></li>
+                    <li><a href="#">order status</a></li>
+                    <li><a href="#">payment options</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>online shop</h4>
+                <ul>
+                    <li><a href="#">download</a></li>
+                    <li><a href="#">changelog</a></li>
+                    <li><a href="#">github</a></li>
+                    <li><a href="#">all version</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>follow us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const toggleBtn = document.querySelector('.toggle-btn');
+        const toggleBtnIcon = document.querySelector('.toggle-btn i');
+        const dropDownMenu = document.querySelector('.dropdown-menu');
+        
+        function closeDropdownMenu() {
+            dropDownMenu.classList.remove('open');
+            toggleBtnIcon.classList = "fa-solid fa-bars";
+        }
+        
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open');
+            const isOpen = dropDownMenu.classList.contains('open');
+            toggleBtnIcon.classList = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+        };
+        
+        // Close dropdown when clicking on links
+        const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
+        dropdownLinks.forEach(function (link) {
+            link.addEventListener('click', closeDropdownMenu);
+        });
+        
+        // Testimonial functionality
+        let userTexts = document.getElementsByClassName("user-text");
+        let userPics = document.getElementsByClassName("user-pic");
+        
+        function showReview() {
+            for (userPic of userPics) {
+                userPic.classList.remove("active-pic");
+            }
+            for (userText of userTexts) {
+                userText.classList.remove("active-text");
+            }
+            
+            let i = Array.from(userPics).indexOf(event.target);
+            
+            userPics[i].classList.add("active-pic");
+            userTexts[i].classList.add("active-text");
+        }
+        
+        // FAQ accordion functionality
+        const buttons = document.querySelectorAll('.question button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const faq = button.nextElementSibling;
+                const icon = button.children[1];
+                
+                faq.classList.toggle('show');
+                icon.classList.toggle('rotate');
+            });
+        });
+        
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        // Observe elements for scroll animations
+        document.querySelectorAll('.hero-text-content, .feature-card, .service-card, .license').forEach((el) => {
+            el.classList.add('hidden-scroll');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
